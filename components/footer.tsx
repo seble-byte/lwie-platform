@@ -1,4 +1,7 @@
 import Link from "next/link"
+import Image from "next/image"
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Footer() {
   return (
@@ -6,29 +9,15 @@ export function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-bold mb-4 dark:text-white">About LWIE</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
-                  How It Works
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
-                  Press
-                </Link>
-              </li>
-            </ul>
+          <div className="flex justify-center mb-4">
+          <Image 
+            src="/images/logo.jpg"
+            alt="Logo"
+            width={150} 
+            height={50} 
+            className="object-contain" 
+          />
+        </div>
           </div>
           <div>
             <h3 className="font-bold mb-4 dark:text-white">Support</h3>
@@ -73,22 +62,26 @@ export function Footer() {
           <div>
             <h3 className="font-bold mb-4 dark:text-white">Connect</h3>
             <ul className="space-y-2">
-              <li>
+              <li className="flex items-center space-x-2">
+                <Facebook className="h-5 w-5 text-gray-600 dark:text-gray-300 hover:text-teal-600" />
                 <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
                   Facebook
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center space-x-2">
+                <Twitter className="h-5 w-5 text-gray-600 dark:text-gray-300 hover:text-teal-600" />
                 <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
                   Twitter
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center space-x-2">
+                <Instagram className="h-5 w-5 text-gray-600 dark:text-gray-300 hover:text-teal-600" />
                 <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
                   Instagram
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center space-x-2">
+                <Linkedin className="h-5 w-5 text-gray-600 dark:text-gray-300 hover:text-teal-600" />
                 <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-teal-600">
                   LinkedIn
                 </Link>

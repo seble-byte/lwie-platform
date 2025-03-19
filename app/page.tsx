@@ -81,7 +81,7 @@ const recommendedItems = [
     condition: "Used",
     image: "/placeholder.svg",
   },
-]
+] 
 
 // Mock data for latest posts
 const latestPosts = [
@@ -545,85 +545,36 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <div className="mt-8">
-            <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Featured Charities</h3>
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {charities.map((charity) => (
-                <motion.div
-                  key={charity.id}
-                  variants={itemVariants}
-                  whileHover={{ y: -5 }}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
-                >
-                  <div className="relative h-40">
-                    <Image src={charity.image || "/placeholder.svg"} alt={charity.name} fill className="object-cover" />
-                  </div>
-                  <div className="p-4">
-                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{charity.name}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{charity.description}</p>
-                    <div className="mb-3">
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Items needed:</p>
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-200">{charity.needed}</p>
-                    </div>
-                    <div className="mb-4">
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div className="bg-teal-600 h-2 rounded-full" style={{ width: `${charity.progress}%` }}></div>
-                      </div>
-                      <p className="text-xs text-right mt-1 text-gray-500 dark:text-gray-400">
-                        {charity.progress}% of goal reached
-                      </p>
-                    </div>
-                    <button
-                      className="w-full py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
-                      onClick={() => router.push(`/charity/${charity.id}`)}
-                    >
-                      Donate
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          
         </section>
 
         {/* Call to Action */}
-        <section className="mb-12">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center"
+        
+    <section className="mb-12">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center"
+      >
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+          Promote Your Items or Seek Aid
+        </h2>
+        <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+          To promote your items or if you need assistance, feel free to reach out to us!
+        </p>
+        <div className="flex justify-center">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => router.push("/advertise")} // Change the route as needed
+            className="px-6 py-3 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors"
           >
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Join the LWIE Community Today</h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-              Post items you don't need, find things you want, and connect with people in your community. Swapping is
-              more sustainable and often more satisfying than buying new.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => router.push("/register")}
-                className="px-6 py-3 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors"
-              >
-                Sign Up Now
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => router.push("/post")}
-                className="px-6 py-3 bg-white text-teal-600 border border-teal-600 rounded-lg font-medium hover:bg-teal-50 transition-colors"
-              >
-                Post an Item
-              </motion.button>
-            </div>
-          </motion.div>
-        </section>
+            Click Here
+          </motion.button>
+        </div>
+      </motion.div>
+    </section>
       </main>
     </div>
   )

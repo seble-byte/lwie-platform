@@ -15,6 +15,16 @@ const categories = [
   "Travel Gear",
   "Craft and Hobby Supplies",
   "Books",
+  "Automotive",
+  "Furniture",
+  "Gardening Supplies",
+  "Office Supplies",
+  "Jewelry and Accessories",
+  "Beauty Tools",
+  "Fitness Equipment",
+  "Gaming",
+  "Stationery",
+  "Musical Instruments"
 ]
 
 export function CategoryNav() {
