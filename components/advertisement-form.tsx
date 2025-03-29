@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -10,7 +12,9 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
-import { Loader2 } from "lucide-react"
+import { Loader2, Upload } from "lucide-react"
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 
 const formSchema = z.object({
   companyName: z.string().min(2, {
@@ -30,12 +34,22 @@ const formSchema = z.object({
     .max(500, {
       message: "Product description cannot exceed 500 characters.",
     }),
+  productImage: z
+    .instanceof(FileList)
+    .refine((files) => files.length > 0, {
+      message: "Please upload at least one file.",
+    })
+    .refine((files) => files[0].size <= MAX_FILE_SIZE, {
+      message: `File size should be less than 5MB.`,
+    })
+    .optional(),
 })
 
 type FormValues = z.infer<typeof formSchema>
 
 export default function AdvertisementForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -54,6 +68,19 @@ export default function AdvertisementForm() {
       // Here you would typically send the data to your API
       console.log(data)
 
+      // For file handling, you would typically use FormData
+      if (data.productImage && data.productImage.length > 0) {
+        const formData = new FormData()
+        formData.append("companyName", data.companyName)
+        formData.append("email", data.email)
+        formData.append("phoneNumber", data.phoneNumber)
+        formData.append("productDescription", data.productDescription)
+        formData.append("productImage", data.productImage[0])
+
+        // You would send formData to your API
+        console.log("Form data with file ready to be sent")
+      }
+
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
@@ -63,6 +90,7 @@ export default function AdvertisementForm() {
       })
 
       form.reset()
+      setSelectedFileName(null)
     } catch (error) {
       toast({
         title: "Something went wrong",
@@ -71,6 +99,15 @@ export default function AdvertisementForm() {
       })
     } finally {
       setIsSubmitting(false)
+    }
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      setSelectedFileName(files[0].name)
+    } else {
+      setSelectedFileName(null)
     }
   }
 
@@ -142,10 +179,46 @@ export default function AdvertisementForm() {
               )}
             />
 
+            <FormField
+              control={form.control}
+              name="productImage"
+              render={({ field: { onChange, value, ...rest } }) => (
+                <FormItem>
+                  <FormLabel>Product Image</FormLabel>
+                  <FormControl>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
+                        <label
+                          htmlFor="productImage"
+                          className="flex items-center gap-2 px-4 py-2 border border-teal-600 rounded-md cursor-pointer hover:bg-teal-600 hover:text-white"                        >
+                          <Upload className="h-4 w-4" />
+                          <span>Choose file</span>
+                        </label>
+                        {selectedFileName && <span className="text-sm text-muted-foreground">{selectedFileName}</span>}
+                      </div>
+                      <Input
+                        id="productImage"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          onChange(e.target.files)
+                          handleFileChange(e)
+                        }}
+                        {...rest}
+                      />
+                    </div>
+                  </FormControl>
+                  <FormDescription>Upload an image of your product (max 5MB).</FormDescription>
+                  <FormMessage className="text-red-500" />
+                </FormItem>
+              )}
+            />
+
             <div className="flex justify-center">
               <Button
                 type="submit"
-                className={`px-8 ${isSubmitting ? 'bg-gray-400 text-white' : 'bg-teal-600 text-white hover:bg-teal-700'}`}
+                className={`px-8 ${isSubmitting ? "bg-gray-400 text-white" : "bg-teal-600 text-white hover:bg-teal-700"}`}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
@@ -153,7 +226,9 @@ export default function AdvertisementForm() {
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Submitting...
                   </>
-                ) : ("Submit Advertisement")}
+                ) : (
+                  "Submit Advertisement"
+                )}
               </Button>
             </div>
           </form>
@@ -165,3 +240,4 @@ export default function AdvertisementForm() {
     </Card>
   )
 }
+

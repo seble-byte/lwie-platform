@@ -48,40 +48,7 @@ const featuredItems = [
 ]
 
 // Mock data for recommended items
-const recommendedItems = [
-  {
-    id: 5,
-    title: "Modern Dining Table",
-    price: "15,000 ETB",
-    location: "Addis Ababa",
-    condition: "Used",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 6,
-    title: "Nikon D3500 Camera",
-    price: "22,000 ETB",
-    location: "Bahir Dar",
-    condition: "Like New",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 7,
-    title: "Sony PlayStation 5",
-    price: "40,000 ETB",
-    location: "Addis Ababa",
-    condition: "New",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 8,
-    title: "Wooden Bookshelf",
-    price: "3,500 ETB",
-    location: "Gondar",
-    condition: "Used",
-    image: "/placeholder.svg",
-  },
-] 
+
 
 // Mock data for latest posts
 const latestPosts = [
@@ -186,7 +153,12 @@ export default function Home() {
   }
 
   const navigateToItemDetail = (itemId: number) => {
-    router.push(`/item/${itemId}`)
+    // Navigate to the product detail page for the leather sofa (id: 1)
+    if (itemId === 1) {
+      router.push(`/products/comfortable-leather-sofa`)
+    } else {
+      router.push(`/item/${itemId}`)
+    }
   }
 
   const categories = ["All", "Electronics", "Furniture", "Vehicles", "Fashion", "Books", "Sports"]
@@ -232,7 +204,7 @@ export default function Home() {
         {/* Section Navigation */}
         <div className="flex justify-center mb-8">
           <div className="flex space-x-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            {["featured", "recommended", "latest"].map((section) => (
+            {["featured", "latest"].map((section) => (
               <button
                 key={section}
                 onClick={() => setVisibleSection(section)}
@@ -343,7 +315,7 @@ export default function Home() {
                         </div>
                         <div className="flex items-center justify-between">
                           <p className="text-sm text-gray-500 dark:text-gray-400">{item.location}</p>
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-md text-sm font-medium">
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                             View
                           </span>
                         </div>
@@ -355,89 +327,7 @@ export default function Home() {
             </motion.section>
           )}
 
-          {/* Recommended Items */}
-          {visibleSection === "recommended" && (
-            <motion.section
-              key="recommended"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="mb-12"
-            >
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Recommended For You</h2>
-                <div className="flex items-center space-x-2 overflow-x-auto pb-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-3 py-1 rounded-full text-sm whitespace-nowrap ${
-                        selectedCategory === category
-                          ? "bg-teal-600 text-white"
-                          : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {isLoading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[1, 2, 3, 4].map((item) => (
-                    <div key={item} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                      <div className="h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-                      <div className="p-4">
-                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
-                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-2/3"></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {recommendedItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      variants={itemVariants}
-                      whileHover={{ y: -5 }}
-                      className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group cursor-pointer"
-                      onClick={() => navigateToItemDetail(item.id)}
-                    >
-                      <div className="relative h-48">
-                        <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
-                      </div>
-                      <div className="p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <div>
-                            <p className="font-bold text-xl text-gray-900 dark:text-white">{item.price}</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">{item.title}</p>
-                          </div>
-                          <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                            {item.condition}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm text-gray-500 dark:text-gray-400">{item.location}</p>
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-md text-sm font-medium">
-                            View
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </motion.section>
-          )}
-
+          
           {/* Latest Posts */}
           {visibleSection === "latest" && (
             <motion.section
@@ -500,7 +390,7 @@ export default function Home() {
                         </div>
                         <div className="flex items-center justify-between">
                           <p className="text-sm text-gray-500 dark:text-gray-400">{item.location}</p>
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-md text-sm font-medium">
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                             View
                           </span>
                         </div>
@@ -532,7 +422,7 @@ export default function Home() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => router.push("/charity")}
-                    className="bg-white text-teal-700 px-6 py-3 rounded-lg font-medium hover:bg-teal-50 transition-colors flex items-center"
+                    className="bg-white text-teal-700 px-6 py-3 rounded-full font-medium hover:bg-teal-50 transition-colors flex items-center"
                   >
                     <Gift className="mr-2 h-5 w-5" />
                     Donate Now
@@ -544,37 +434,32 @@ export default function Home() {
               </div>
             </div>
           </motion.div>
-
-          
         </section>
 
         {/* Call to Action */}
-        
-    <section className="mb-12">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center"
-      >
-        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-          Promote Your Items or Seek Aid
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-          To promote your items or if you need assistance, feel free to reach out to us!
-        </p>
-        <div className="flex justify-center">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/advertise")} // Change the route as needed
-            className="px-6 py-3 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors"
+        <section className="mb-12">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center"
           >
-            Click Here
-          </motion.button>
-        </div>
-      </motion.div>
-    </section>
+            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Promote Your Items or Seek Aid</h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
+              To promote your items or if you need assistance, feel free to reach out to us!
+            </p>
+            <div className="flex justify-center">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => router.push("/advertise")} // Change the route as needed
+                className="px-6 py-3 bg-teal-600 text-white rounded-full font-medium hover:bg-teal-700 transition-colors"
+              >
+                Click Here
+              </motion.button>
+            </div>
+          </motion.div>
+        </section>
       </main>
     </div>
   )

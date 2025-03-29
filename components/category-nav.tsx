@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const categories = [
   "Electronics",
@@ -15,39 +15,44 @@ const categories = [
   "Travel Gear",
   "Craft and Hobby Supplies",
   "Books",
-  "Automotive",
-  "Furniture",
-  "Gardening Supplies",
-  "Office Supplies",
-  "Jewelry and Accessories",
-  "Beauty Tools",
-  "Fitness Equipment",
-  "Gaming",
-  "Stationery",
-  "Musical Instruments"
-]
+  "Furniture",            
+  "Gardening Supplies",   
+  "Office Supplies",      
+  "Automotive",          
+  "Jewelry",              
+  "Video Games",          
+  "Outdoor Gear",         
+  "Kitchen Accessories",  
+  "Seasonal Items",       
+];
 
 export function CategoryNav() {
-  const [currentCategory, setCurrentCategory] = useState(0)
+  const [currentCategory, setCurrentCategory] = useState(0);
 
   const scrollCategories = (direction: "left" | "right") => {
-    const container = document.getElementById("categories-container")
+    const container = document.getElementById("categories-container");
     if (container) {
-      const scrollAmount = direction === "left" ? -200 : 200
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" })
+      const scrollAmount = direction === "left" ? -200 : 200;
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
-  }
+  };
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow relative">
+    <nav className="bg-[rgba(184,200,200,1)] dark:bg-gray-800 shadow relative py-2"> {/* Modified background color */}
+      {/* Left Scroll Button */}
       <button
         onClick={() => scrollCategories("left")}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg z-10"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg z-20 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
-      <div id="categories-container" className="container mx-auto px-12 overflow-x-auto scrollbar-hide">
-        <div className="flex items-center space-x-8 py-4 whitespace-nowrap">
+
+      {/* Categories Container */}
+      <div
+        id="categories-container"
+        className="container mx-auto px-12 overflow-x-auto scrollbar-hide"
+      >
+        <div className="flex items-center space-x-8 py-2 whitespace-nowrap">
           {categories.map((category, index) => (
             <button
               key={category}
@@ -63,13 +68,14 @@ export function CategoryNav() {
           ))}
         </div>
       </div>
+
+      {/* Right Scroll Button */}
       <button
         onClick={() => scrollCategories("right")}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg z-10"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 p-2 rounded-full shadow-lg z-20 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
     </nav>
-  )
+  );
 }
-
