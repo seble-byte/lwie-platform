@@ -11,12 +11,12 @@ import { useTheme } from "next-themes"
 const itemData = {
   id: 1,
   title: "Comfortable Leather Sofa",
-  price: "10,500 ETB",
+  price: "20,500 ETB",
   location: "Addis Ababa",
   condition: "Used",
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non varius sapien, at imperdiet felis. Nam auctor, nisi eget varius sapien, at imperdiet felis.",
-  images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+  images: ["/sofa1.jpg", "/sofa2.jpg", "/sofa3.jpg", "/sofa4.jpg"],
   owner: {
     name: "John Doe",
     image: "/placeholder.svg",
@@ -27,18 +27,18 @@ const itemData = {
     {
       id: 2,
       title: "Modern Sofa",
-      price: "20,000 ETB",
+      price: "150,000 ETB",
       location: "Hawassa",
       condition: "Used",
-      image: "/placeholder.svg",
+      image: "/modern sofa.jpg",
     },
     {
       id: 3,
       title: "Modern Dining Table",
-      price: "20,000 ETB",
+      price: "30,000 ETB",
       location: "Addis Ababa",
       condition: "Used",
-      image: "/placeholder.svg",
+      image: "/dining table.jpg",
     },
     // Add more related items...
   ],
@@ -134,7 +134,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Swapper Information</h2>
               <div className="flex items-center space-x-4">
                 <Image
-                  src={itemData.owner.image || "/placeholder.svg"}
+                  src={itemData.owner.image || "/sofa.jpg"}
                   alt={itemData.owner.name}
                   width={48}
                   height={48}
@@ -176,7 +176,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
                 className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
               >
                 <div className="relative h-48">
-                  <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
+                  <Image src={item.image || "/sofa.jpg"} alt={item.title} fill className="object-cover" />
                 </div>
                 <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
@@ -210,7 +210,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
         >
           <div className="relative w-full h-full max-w-4xl mx-auto p-4">
             <Image
-              src={itemData.images[currentImageIndex] || "/placeholder.svg"}
+              src={itemData.images[currentImageIndex] || "/sofa.jpg"}
               alt={itemData.title}
               fill
               className="object-contain"

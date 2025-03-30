@@ -12,42 +12,42 @@ const featuredItems = [
   {
     id: 1,
     title: "Comfortable Leather Sofa",
-    price: "17,500 ETB",
+    price: "20,500 ETB",
     location: "Addis Ababa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/sofa1.jpg",
     likes: 23,
   },
   {
     id: 2,
     title: "V40 Toyota",
-    price: "450,000 ETB",
+    price: "2,300,000 ETB",
     location: "Addis Ababa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/v40 toyota.jpg",
     likes: 45,
   },
   {
     id: 3,
     title: "iPhone 13 Pro",
-    price: "35,000 ETB",
+    price: "55,000 ETB",
     location: "Dire Dawa",
     condition: "Like New",
-    image: "/placeholder.svg",
+    image: "/iphone 13.jpg",
     likes: 18,
   },
   {
     id: 4,
     title: "Mountain Bike",
-    price: "12,000 ETB",
+    price: "14,000 ETB",
     location: "Hawassa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/bike.jpg",
     likes: 12,
   },
 ]
 
-// Mock data for recommended items
+
 
 
 // Mock data for latest posts
@@ -58,7 +58,7 @@ const latestPosts = [
     price: "75,000 ETB",
     location: "Addis Ababa",
     condition: "Like New",
-    image: "/placeholder.svg",
+    image: "/mac.jpg",
     postedTime: "5 minutes ago",
   },
   {
@@ -67,7 +67,7 @@ const latestPosts = [
     price: "7,800 ETB",
     location: "Mekelle",
     condition: "Good",
-    image: "/placeholder.svg",
+    image: "/vintage record player.jpg",
     postedTime: "2 hours ago",
   },
   {
@@ -76,7 +76,7 @@ const latestPosts = [
     price: "13,500 ETB",
     location: "Addis Ababa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/Ab Roller Wheel Set.jpg",
     postedTime: "4 hours ago",
   },
   {
@@ -85,36 +85,8 @@ const latestPosts = [
     price: "5,000 ETB",
     location: "Hawassa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/coffee table.jpg",
     postedTime: "6 hours ago",
-  },
-]
-
-// Mock data for charity organizations
-const charities = [
-  {
-    id: 1,
-    name: "Ethiopian Red Cross Society",
-    description: "Supporting communities in need through healthcare and disaster relief.",
-    image: "/placeholder.svg",
-    progress: 75,
-    needed: "Clothing, Medical Supplies",
-  },
-  {
-    id: 2,
-    name: "Mekedonia Humanitarian Association",
-    description: "Care for the elderly and mentally disabled people in Ethiopia.",
-    image: "/placeholder.svg",
-    progress: 60,
-    needed: "Food, Clothing, Hygiene Products",
-  },
-  {
-    id: 3,
-    name: "SOS Children's Villages Ethiopia",
-    description: "Supporting orphaned and abandoned children across Ethiopia.",
-    image: "/placeholder.svg",
-    progress: 85,
-    needed: "Books, Toys, School Supplies",
   },
 ]
 
@@ -429,7 +401,7 @@ export default function Home() {
                   </motion.button>
                 </div>
                 <div className="relative w-full md:w-1/3 h-64 rounded-lg overflow-hidden">
-                  <Image src="/placeholder.svg" alt="Charity" fill className="object-cover" />
+                  <Image src="/charety.jpg" alt="Charity" fill className="object-cover" />
                 </div>
               </div>
             </div>
