@@ -12,7 +12,7 @@ const charities = [
     id: 1,
     name: "Ethiopian Red Cross Society",
     description: "Supporting communities in need through healthcare and disaster relief.",
-    image: "/placeholder.svg",
+    image: "/red cross.jpg",
     progress: 75,
     goal: 150,
     needed: ["Clothing", "Medical Supplies", "Food"],
@@ -22,7 +22,7 @@ const charities = [
     id: 2,
     name: "Mekedonia Humanitarian Association",
     description: "Care for the elderly and mentally disabled people in Ethiopia.",
-    image: "/placeholder.svg",
+    image: "/mekedonya.jpg",
     progress: 60,
     goal: 200,
     needed: ["Food", "Clothing", "Hygiene Products", "Bedding"],
@@ -32,7 +32,7 @@ const charities = [
     id: 3,
     name: "SOS Children's Villages Ethiopia",
     description: "Supporting orphaned and abandoned children across Ethiopia.",
-    image: "/placeholder.svg",
+    image: "/sos.png",
     progress: 85,
     goal: 300,
     needed: ["Books", "Toys", "School Supplies", "Clothing"],
@@ -42,7 +42,7 @@ const charities = [
     id: 4,
     name: "Ethiopian Wildlife Conservation Authority",
     description: "Protecting Ethiopia's unique wildlife and natural habitats.",
-    image: "/placeholder.svg",
+    image: "/wild life.jpg",
     progress: 40,
     goal: 100,
     needed: ["Equipment", "Office Supplies", "Educational Materials"],
@@ -52,7 +52,7 @@ const charities = [
     id: 5,
     name: "Hope for Children Organization",
     description: "Providing education and support for vulnerable children.",
-    image: "/placeholder.svg",
+    image: "/hope.jpg",
     progress: 55,
     goal: 250,
     needed: ["School Supplies", "Books", "Clothing", "Computers"],
@@ -62,7 +62,7 @@ const charities = [
     id: 6,
     name: "Ethiopian Food Bank",
     description: "Fighting hunger by collecting and distributing food to those in need.",
-    image: "/placeholder.svg",
+    image: "/food bank.jpg",
     progress: 30,
     goal: 500,
     needed: ["Food", "Storage Containers", "Transportation Equipment"],
@@ -308,7 +308,7 @@ export default function CharityPage() {
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-1/3 mb-6 md:mb-0 md:mr-8">
                 <div className="relative h-64 w-full rounded-lg overflow-hidden">
-                  <Image src="/placeholder.svg" alt="Impact Story" fill className="object-cover" />
+                  <Image src="/happy.jpg" alt="Impact Story" fill className="object-cover" />
                 </div>
               </div>
               <div className="md:w-2/3">

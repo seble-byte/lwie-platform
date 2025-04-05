@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { Eye, EyeOff, Camera, Loader2 } from "lucide-react"
-import Image from "next/image"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Eye, EyeOff, Camera, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 const registerSchema = z
   .object({
@@ -25,17 +25,17 @@ const registerSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
-  })
+  });
 
-type RegisterData = z.infer<typeof registerSchema>
+type RegisterData = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [showBiometric, setShowBiometric] = useState(false)
-  const [error, setError] = useState("")
-  const router = useRouter()
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showBiometric, setShowBiometric] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const {
     register,
@@ -43,38 +43,40 @@ export default function RegisterPage() {
     formState: { errors },
   } = useForm<RegisterData>({
     resolver: zodResolver(registerSchema),
-  })
+  });
 
   const onSubmit = async (data: RegisterData) => {
     try {
-      setIsLoading(true)
-      setError("")
+      setIsLoading(true);
+      setError("");
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // Simulate an API call
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      router.push("/")
+      // Show biometric registration UI
+      setShowBiometric(true);
     } catch (err) {
-      setError("Registration failed. Please try again.")
+      setError("Registration failed. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleBiometricRegistration = async () => {
     try {
-      setIsLoading(true)
-      setError("")
+      setIsLoading(true);
+      setError("");
 
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // Simulate API call for biometric registration
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      router.push("/")
+      router.push("/"); // Navigate to home after successful registration
     } catch (err) {
-      setError("Biometric registration failed")
+      setError("Biometric registration failed");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -88,28 +90,6 @@ export default function RegisterPage() {
             </Link>
             <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-white">Create your account</h2>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Join our community and start swapping!</p>
-          </div>
-
-          {/* Registration Options */}
-          <div className="flex justify-center space-x-4">
-            <button
-              onClick={() => setShowBiometric(false)}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
-                !showBiometric
-                  ? "bg-teal-600 text-white hover:bg-teal-700"
-                  : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
-              }`}
-            >
-              Standard
-            </button>
-            <button
-              onClick={() => setShowBiometric(true)}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
-                showBiometric ? "bg-teal-600 text-white hover:bg-teal-700" : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700"
-              }`}
-            >
-              Biometric
-            </button>
           </div>
 
           {showBiometric ? (
@@ -215,7 +195,7 @@ export default function RegisterPage() {
                   disabled={isLoading}
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Sign up"}
+                  {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Next"}
                 </button>
               </div>
             </form>
@@ -228,5 +208,5 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

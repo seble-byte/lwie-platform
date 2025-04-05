@@ -12,76 +12,43 @@ const featuredItems = [
   {
     id: 1,
     title: "Comfortable Leather Sofa",
-    price: "17,500 ETB",
+    price: "20,500 ETB",
     location: "Addis Ababa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/sofa1.jpg",
     likes: 23,
   },
   {
     id: 2,
     title: "V40 Toyota",
-    price: "450,000 ETB",
+    price: "2,300,000 ETB",
     location: "Addis Ababa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/v40 toyota.jpg",
     likes: 45,
   },
   {
     id: 3,
     title: "iPhone 13 Pro",
-    price: "35,000 ETB",
+    price: "55,000 ETB",
     location: "Dire Dawa",
     condition: "Like New",
-    image: "/placeholder.svg",
+    image: "/iphone 13.jpg",
     likes: 18,
   },
   {
     id: 4,
     title: "Mountain Bike",
-    price: "12,000 ETB",
+    price: "14,000 ETB",
     location: "Hawassa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/bike.jpg",
     likes: 12,
   },
 ]
 
-// Mock data for recommended items
-const recommendedItems = [
-  {
-    id: 5,
-    title: "Modern Dining Table",
-    price: "15,000 ETB",
-    location: "Addis Ababa",
-    condition: "Used",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 6,
-    title: "Nikon D3500 Camera",
-    price: "22,000 ETB",
-    location: "Bahir Dar",
-    condition: "Like New",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 7,
-    title: "Sony PlayStation 5",
-    price: "40,000 ETB",
-    location: "Addis Ababa",
-    condition: "New",
-    image: "/placeholder.svg",
-  },
-  {
-    id: 8,
-    title: "Wooden Bookshelf",
-    price: "3,500 ETB",
-    location: "Gondar",
-    condition: "Used",
-    image: "/placeholder.svg",
-  },
-]
+
+
 
 // Mock data for latest posts
 const latestPosts = [
@@ -91,7 +58,7 @@ const latestPosts = [
     price: "75,000 ETB",
     location: "Addis Ababa",
     condition: "Like New",
-    image: "/placeholder.svg",
+    image: "/mac.jpg",
     postedTime: "5 minutes ago",
   },
   {
@@ -100,7 +67,7 @@ const latestPosts = [
     price: "7,800 ETB",
     location: "Mekelle",
     condition: "Good",
-    image: "/placeholder.svg",
+    image: "/vintage record player.jpg",
     postedTime: "2 hours ago",
   },
   {
@@ -109,7 +76,7 @@ const latestPosts = [
     price: "13,500 ETB",
     location: "Addis Ababa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/Ab Roller Wheel Set.jpg",
     postedTime: "4 hours ago",
   },
   {
@@ -118,36 +85,8 @@ const latestPosts = [
     price: "5,000 ETB",
     location: "Hawassa",
     condition: "Used",
-    image: "/placeholder.svg",
+    image: "/coffee table.jpg",
     postedTime: "6 hours ago",
-  },
-]
-
-// Mock data for charity organizations
-const charities = [
-  {
-    id: 1,
-    name: "Ethiopian Red Cross Society",
-    description: "Supporting communities in need through healthcare and disaster relief.",
-    image: "/placeholder.svg",
-    progress: 75,
-    needed: "Clothing, Medical Supplies",
-  },
-  {
-    id: 2,
-    name: "Mekedonia Humanitarian Association",
-    description: "Care for the elderly and mentally disabled people in Ethiopia.",
-    image: "/placeholder.svg",
-    progress: 60,
-    needed: "Food, Clothing, Hygiene Products",
-  },
-  {
-    id: 3,
-    name: "SOS Children's Villages Ethiopia",
-    description: "Supporting orphaned and abandoned children across Ethiopia.",
-    image: "/placeholder.svg",
-    progress: 85,
-    needed: "Books, Toys, School Supplies",
   },
 ]
 
@@ -186,7 +125,12 @@ export default function Home() {
   }
 
   const navigateToItemDetail = (itemId: number) => {
-    router.push(`/item/${itemId}`)
+    // Navigate to the product detail page for the leather sofa (id: 1)
+    if (itemId === 1) {
+      router.push(`/products/comfortable-leather-sofa`)
+    } else {
+      router.push(`/item/${itemId}`)
+    }
   }
 
   const categories = ["All", "Electronics", "Furniture", "Vehicles", "Fashion", "Books", "Sports"]
@@ -232,7 +176,7 @@ export default function Home() {
         {/* Section Navigation */}
         <div className="flex justify-center mb-8">
           <div className="flex space-x-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg">
-            {["featured", "recommended", "latest"].map((section) => (
+            {["featured", "latest"].map((section) => (
               <button
                 key={section}
                 onClick={() => setVisibleSection(section)}
@@ -343,7 +287,7 @@ export default function Home() {
                         </div>
                         <div className="flex items-center justify-between">
                           <p className="text-sm text-gray-500 dark:text-gray-400">{item.location}</p>
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-md text-sm font-medium">
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                             View
                           </span>
                         </div>
@@ -355,89 +299,7 @@ export default function Home() {
             </motion.section>
           )}
 
-          {/* Recommended Items */}
-          {visibleSection === "recommended" && (
-            <motion.section
-              key="recommended"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="mb-12"
-            >
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Recommended For You</h2>
-                <div className="flex items-center space-x-2 overflow-x-auto pb-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-3 py-1 rounded-full text-sm whitespace-nowrap ${
-                        selectedCategory === category
-                          ? "bg-teal-600 text-white"
-                          : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700"
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {isLoading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[1, 2, 3, 4].map((item) => (
-                    <div key={item} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                      <div className="h-48 bg-gray-200 dark:bg-gray-700 animate-pulse"></div>
-                      <div className="p-4">
-                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse mb-2"></div>
-                        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-2/3"></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {recommendedItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      variants={itemVariants}
-                      whileHover={{ y: -5 }}
-                      className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group cursor-pointer"
-                      onClick={() => navigateToItemDetail(item.id)}
-                    >
-                      <div className="relative h-48">
-                        <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
-                      </div>
-                      <div className="p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <div>
-                            <p className="font-bold text-xl text-gray-900 dark:text-white">{item.price}</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">{item.title}</p>
-                          </div>
-                          <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                            {item.condition}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm text-gray-500 dark:text-gray-400">{item.location}</p>
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-md text-sm font-medium">
-                            View
-                          </span>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </motion.section>
-          )}
-
+          
           {/* Latest Posts */}
           {visibleSection === "latest" && (
             <motion.section
@@ -500,7 +362,7 @@ export default function Home() {
                         </div>
                         <div className="flex items-center justify-between">
                           <p className="text-sm text-gray-500 dark:text-gray-400">{item.location}</p>
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-md text-sm font-medium">
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-full text-sm font-medium">
                             View
                           </span>
                         </div>
@@ -532,63 +394,18 @@ export default function Home() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => router.push("/charity")}
-                    className="bg-white text-teal-700 px-6 py-3 rounded-lg font-medium hover:bg-teal-50 transition-colors flex items-center"
+                    className="bg-white text-teal-700 px-6 py-3 rounded-full font-medium hover:bg-teal-50 transition-colors flex items-center"
                   >
                     <Gift className="mr-2 h-5 w-5" />
                     Donate Now
                   </motion.button>
                 </div>
                 <div className="relative w-full md:w-1/3 h-64 rounded-lg overflow-hidden">
-                  <Image src="/placeholder.svg" alt="Charity" fill className="object-cover" />
+                  <Image src="/charety.jpg" alt="Charity" fill className="object-cover" />
                 </div>
               </div>
             </div>
           </motion.div>
-
-          <div className="mt-8">
-            <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Featured Charities</h3>
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {charities.map((charity) => (
-                <motion.div
-                  key={charity.id}
-                  variants={itemVariants}
-                  whileHover={{ y: -5 }}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
-                >
-                  <div className="relative h-40">
-                    <Image src={charity.image || "/placeholder.svg"} alt={charity.name} fill className="object-cover" />
-                  </div>
-                  <div className="p-4">
-                    <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{charity.name}</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{charity.description}</p>
-                    <div className="mb-3">
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Items needed:</p>
-                      <p className="text-sm font-medium text-gray-700 dark:text-gray-200">{charity.needed}</p>
-                    </div>
-                    <div className="mb-4">
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div className="bg-teal-600 h-2 rounded-full" style={{ width: `${charity.progress}%` }}></div>
-                      </div>
-                      <p className="text-xs text-right mt-1 text-gray-500 dark:text-gray-400">
-                        {charity.progress}% of goal reached
-                      </p>
-                    </div>
-                    <button
-                      className="w-full py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors"
-                      onClick={() => router.push(`/charity/${charity.id}`)}
-                    >
-                      Donate
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
         </section>
 
         {/* Call to Action */}
@@ -599,27 +416,18 @@ export default function Home() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center"
           >
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Join the LWIE Community Today</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Promote Your Items or Seek Aid</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-              Post items you don't need, find things you want, and connect with people in your community. Swapping is
-              more sustainable and often more satisfying than buying new.
+              To promote your items or if you need assistance, feel free to reach out to us!
             </p>
-            <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => router.push("/register")}
-                className="px-6 py-3 bg-teal-600 text-white rounded-lg font-medium hover:bg-teal-700 transition-colors"
+                onClick={() => router.push("/advertise")} // Change the route as needed
+                className="px-6 py-3 bg-teal-600 text-white rounded-full font-medium hover:bg-teal-700 transition-colors"
               >
-                Sign Up Now
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => router.push("/post")}
-                className="px-6 py-3 bg-white text-teal-600 border border-teal-600 rounded-lg font-medium hover:bg-teal-50 transition-colors"
-              >
-                Post an Item
+                Click Here
               </motion.button>
             </div>
           </motion.div>
