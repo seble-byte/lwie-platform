@@ -1,0 +1,23 @@
+[33m0f34485[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{0}: checkout: moving from update-ni to main
+[33maeb018b[m[33m ([m[1;31morigin/update-ni[m[33m, [m[1;32mupdate-ni[m[33m)[m HEAD@{1}: checkout: moving from main to update-ni
+[33m0f34485[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{2}: reset: moving to HEAD~1
+[33m92f5e31[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{3}: commit: up
+[33m0f34485[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{4}: commit (merge): Merge branch 'main' of https://github.com/Guyatu1627/lwie-platform
+[33ma904a9f[m HEAD@{5}: checkout: moving from update-ni to main
+[33maeb018b[m[33m ([m[1;31morigin/update-ni[m[33m, [m[1;32mupdate-ni[m[33m)[m HEAD@{6}: commit: some modifivations on post and products list
+[33m821c35a[m HEAD@{7}: checkout: moving from update-ni to update-ni
+[33m821c35a[m HEAD@{8}: commit: some modifications
+[33m7b0b729[m HEAD@{9}: checkout: moving from update-ni to update-ni
+[33m7b0b729[m HEAD@{10}: commit (merge): changes in some pages and advertisement form
+[33m2e54253[m HEAD@{11}: checkout: moving from main to update-ni
+[33ma904a9f[m HEAD@{12}: checkout: moving from update-ni to main
+[33m2e54253[m HEAD@{13}: checkout: moving from main to update-ni
+[33ma904a9f[m HEAD@{14}: commit: Add page.tsx file
+[33maf7945f[m HEAD@{15}: pull origin update-ni: Fast-forward
+[33m2f43c41[m HEAD@{16}: checkout: moving from update-ni to main
+[33m2e54253[m HEAD@{17}: commit: modification on some pages and add advertisement page
+[33m2f43c41[m HEAD@{18}: checkout: moving from update-ni to update-ni
+[33m2f43c41[m HEAD@{19}: reset: moving to HEAD~1
+[33maf7945f[m HEAD@{20}: commit: change
+[33m2f43c41[m HEAD@{21}: checkout: moving from main to update-ni
+[33m2f43c41[m HEAD@{22}: clone: from https://github.com/Guyatu1627/lwie-platform.git

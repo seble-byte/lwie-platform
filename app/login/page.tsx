@@ -1,5 +1,6 @@
 "use client"
 
+
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -23,6 +24,7 @@ export default function LoginPage() {
   const [showBiometric, setShowBiometric] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
+  
 
   const {
     register,
