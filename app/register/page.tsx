@@ -1,5 +1,5 @@
 "use client";
-
+import poster from "@/shared/post";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,9 +11,10 @@ import Image from "next/image";
 
 const registerSchema = z
   .object({
-    fullName: z.string().min(2, "Full name must be at least 2 characters"),
-    email: z.string().email("Please enter a valid email address"),
-    password: z
+    Firstname: z.string().min(2, "Full name must be at least 2 characters"),
+    Lastname: z.string().min(2, "Full name must be at least 2 characters"),
+    Email: z.string().email("Please enter a valid email address"),
+    Password: z
       .string()
       .min(8, "Password must be at least 8 characters")
       .regex(
@@ -22,7 +23,7 @@ const registerSchema = z
       ),
     confirmPassword: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.Password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
@@ -47,8 +48,21 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: RegisterData) => {
     try {
+     
       setIsLoading(true);
       setError("");
+
+      const payload = {
+        Firstname: data.Firstname,
+        Lastname: data.Lastname,
+        Email: data.Email,
+        Password: data.Password,
+      };
+
+      // Use the poster function to send a POST request
+      const response = await poster('users', payload);
+      // console.log(response.data +"here is the date ")
+      
 
       // Simulate an API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -79,7 +93,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50
+     dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         {/* Content Box */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
@@ -96,14 +111,17 @@ export default function RegisterPage() {
             // Biometric Registration UI
             <div className="mt-8 space-y-6">
               <div className="flex flex-col items-center space-y-4">
-                <div className="w-48 h-48 rounded-full border-2 border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
+                <div className="w-48 h-48 rounded-full border-2 border-dashed border-gray-300 dark:border-gray-700 
+                flex items-center justify-center bg-gray-50 dark:bg-gray-800">
                   <Camera className="w-16 h-16 text-gray-400" />
                 </div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Position your face in the center</p>
                 <button
                   onClick={handleBiometricRegistration}
                   disabled={isLoading}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full 
+                  shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none 
+                  focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Register with Face ID"}
                 </button>
@@ -114,39 +132,65 @@ export default function RegisterPage() {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
-                  <label htmlFor="full-name" className="sr-only">Full Name</label>
+                  <label htmlFor="f-name" className="sr-only">First Name</label>
                   <input
-                    {...register("fullName")}
-                    id="full-name"
+                    {...register("Firstname")}
+                    id="f-name"
                     type="text"
                     autoComplete="name"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-800 mb-4"
-                    placeholder="Full Name"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border
+                     border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400
+                      text-gray-900 dark:text-white rounded-t-md focus:outline-none focus:ring-teal-500
+                       focus:border-teal-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-800 mb-4"
+                    placeholder="First Name"
                   />
-                  {errors.fullName && (
-                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.fullName.message}</p>
+                  {errors.Firstname && (
+                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.Firstname.message}</p>
+                  )}
+                </div>
+                <div>
+                  <label htmlFor="l-name" className="sr-only">Last Name</label>
+                  <input
+                    {...register("Lastname")}
+                    id="l-name"
+                    type="text"
+                    autoComplete="name"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300
+                     dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900
+                      dark:text-white rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 
+                      focus:z-10 sm:text-sm bg-white dark:bg-gray-800 mb-4"
+                    placeholder="Last Name"
+                  />
+                  {errors.Lastname && (
+                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.Lastname.message}</p>
                   )}
                 </div>
                 <div>
                   <label htmlFor="email-address" className="sr-only">Email address</label>
                   <input
-                    {...register("email")}
+                    {...register("Email")}
                     id="email-address"
                     type="email"
                     autoComplete="email"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-800 mb-4"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300
+                     dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900
+                      dark:text-white focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 
+                      sm:text-sm bg-white dark:bg-gray-800 mb-4"
                     placeholder="Email address"
                   />
-                  {errors.email && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email.message}</p>}
+                  {errors.Email && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.Email.message}</p>}
                 </div>
                 <div className="relative">
                   <label htmlFor="password" className="sr-only">Password</label>
                   <input
-                    {...register("password")}
+                    {...register("Password")}
                     id="password"
                     type={showPassword ? "text" : "password"}
                     autoComplete="new-password"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-800 mb-4"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300
+                     dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900
+                      dark:text-white focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 
+                      sm:text-sm bg-white dark:bg-gray-800 mb-4"
                     placeholder="Password"
                   />
                   <button
@@ -156,8 +200,8 @@ export default function RegisterPage() {
                   >
                     {showPassword ? <EyeOff className="h-5 w-5 text-gray-400" /> : <Eye className="h-5 w-5 text-gray-400" />}
                   </button>
-                  {errors.password && (
-                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password.message}</p>
+                  {errors.Password && (
+                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.Password.message}</p>
                   )}
                 </div>
                 <div className="relative">
@@ -167,7 +211,11 @@ export default function RegisterPage() {
                     id="confirm-password"
                     type={showConfirmPassword ? "text" : "password"}
                     autoComplete="new-password"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-800"
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300
+                     dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900
+                     
+                     dark:text-white rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 
+                     focus:z-10 sm:text-sm bg-white dark:bg-gray-800"
                     placeholder="Confirm Password"
                   />
                   <button
@@ -193,7 +241,10 @@ export default function RegisterPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent
+                   text-sm font-medium rounded-full text-white bg-teal-600 hover:bg-teal-700 
+                   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50
+                    disabled:cursor-not-allowed"
                 >
                   {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Next"}
                 </button>
