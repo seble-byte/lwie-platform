@@ -79,3 +79,4 @@ export function CategoryNav() {
     </nav>
   );
 }
+export default CategoryNav;

@@ -1,80 +1,80 @@
-"use client";
+"use client"
 
-import type React from "react";
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
-import { Search, HelpCircle, Bell, ShoppingCart, Sun, Moon } from "lucide-react";
-import { CategoryNav } from "./category-nav";
+import type React from "react"
+import { useState, useEffect, useRef } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { useTheme } from "next-themes"
+import { useRouter } from "next/navigation"
+import { AnimatePresence, motion } from "framer-motion"
+import { Search, HelpCircle, Bell, ShoppingCart, Sun, Moon } from "lucide-react"
+import { CategoryNav } from "./category-nav"
 
 interface SearchResult {
-  id: string;
-  title: string;
-  image: string;
-  price: string;
+  id: string
+  title: string
+  image: string
+  price: string
 }
 
 export function Header() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [showCartPreview, setShowCartPreview] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-  const notificationRef = useRef<HTMLDivElement>(null);
-  const cartRef = useRef<HTMLDivElement>(null);
-  const profileRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([])
+  const [showSearchResults, setShowSearchResults] = useState(false)
+  const [showNotifications, setShowNotifications] = useState(false)
+  const [showCartPreview, setShowCartPreview] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false)
+  const searchRef = useRef<HTMLDivElement>(null)
+  const notificationRef = useRef<HTMLDivElement>(null)
+  const cartRef = useRef<HTMLDivElement>(null)
+  const profileRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   // Mock search results
   const mockSearchResults = [
     { id: "1", title: "iPhone 13 Pro", image: "/placeholder.svg", price: "35,000 ETB" },
     { id: "2", title: "Modern Sofa", image: "/placeholder.svg", price: "12,500 ETB" },
     { id: "3", title: "Mountain Bike", image: "/placeholder.svg", price: "8,000 ETB" },
-  ];
+  ]
 
   // Mock notifications
   const notifications = [
     { id: "1", title: "New swap request", message: "John wants to swap with you", time: "5 min ago" },
     { id: "2", title: "Message received", message: "New message from Sarah", time: "1 hour ago" },
     { id: "3", title: "Swap accepted", message: "Your swap request was accepted", time: "2 hours ago" },
-  ];
+  ]
 
   // Mock cart items
   const cartItems = [
     { id: "1", title: "Vintage Camera", image: "/placeholder.svg", price: "1,500 ETB" },
     { id: "2", title: "Wireless Headphones", image: "/placeholder.svg", price: "2,200 ETB" },
-  ];
+  ]
 
   // Handle click outside to close dropdowns
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowSearchResults(false);
+        setShowSearchResults(false)
       }
       if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
-        setShowNotifications(false);
+        setShowNotifications(false)
       }
       if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
-        setShowCartPreview(false);
+        setShowCartPreview(false)
       }
       if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
-        setShowProfileDropdown(false);
+        setShowProfileDropdown(false)
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   // Live search implementation
   useEffect(() => {
@@ -82,53 +82,53 @@ export function Header() {
       // In a real app, you would fetch from an API
       const filteredResults = mockSearchResults.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
-      setSearchResults(filteredResults);
-      setShowSearchResults(true);
+      )
+      setSearchResults(filteredResults)
+      setShowSearchResults(true)
     } else {
-      setShowSearchResults(false);
+      setShowSearchResults(false)
     }
-  }, [searchQuery]);
+  }, [searchQuery])
 
   // Theme effect
   useEffect(() => {
-    setMounted(true);
+    setMounted(true)
 
     // Check if user is logged in (from localStorage in this example)
-    const userLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(userLoggedIn);
-  }, []);
+    const userLoggedIn = localStorage.getItem("isLoggedIn") === "true"
+    setIsLoggedIn(userLoggedIn)
+  }, [])
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
-      setShowSearchResults(false);
+      router.push(`/search?q=${encodeURIComponent(searchQuery)}`)
+      setShowSearchResults(false)
     }
-  };
+  }
 
   const handleLogin = () => {
     if (isLoggedIn) {
-      setShowProfileDropdown(!showProfileDropdown);
+      setShowProfileDropdown(!showProfileDropdown)
     } else {
-      router.push("/login");
+      router.push("/login")
     }
-  };
+  }
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
-    setShowProfileDropdown(false);
-    router.push("/");
-  };
+    localStorage.removeItem("isLoggedIn")
+    setIsLoggedIn(false)
+    setShowProfileDropdown(false)
+    router.push("/")
+  }
 
   const navigateToHelp = () => {
-    router.push("/help");
-  };
+    router.push("/help")
+  }
 
   const navigateToPost = () => {
-    router.push("/post");
-  };
+    router.push("/post")
+  }
 
   return (
     <header className="bg-teal-700 dark:bg-teal-900 sticky top-0 z-50">
@@ -397,11 +397,25 @@ export function Header() {
                 {theme === "dark" ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
               </motion.button>
             )}
+
+            {/* Profile Avatar  */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => router.push("/profile")}
+              className="text-white hover:bg-teal-600 p-1 rounded-full overflow-hidden"
+              aria-label="Go to Profile"
+            >
+              <div className="h-8 w-8 relative">
+                <Image src="/placeholder.svg" alt="Profile" fill className="object-cover rounded-full" />
+              </div>
+            </motion.button>
           </div>
         </div>
       </div>
 
       <CategoryNav />
     </header>
-  );
+  )
 }
+
