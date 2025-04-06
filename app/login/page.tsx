@@ -30,50 +30,51 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false)
   
   
- const handleSubmit = async (e: React.FormEvent) => {
-     e.preventDefault();
-     setIsLoading(true);
-     setError(null);
-   
-     // Validate email format
-     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-     if (!emailRegex.test(Email)) {
-       setError("Please enter a valid email address");
-       setIsLoading(false);
-       return; // Prevent further execution
-     }
-   
-     // Validate password length
-     if (Password.length < 6) {
-       setError("Password must be at least 6 characters");
-       setIsLoading(false);
-       return; // Prevent further execution
-     }
-   
-     try {
-       const data = await poster('api/login', { Email, Password });
-       console.log("User data:", data);
-   
-       // Set authentication cookies ll
-       const cookieMaxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 24; // 30 days or 1 day
-<<<<<<< HEAD
-      router.push("/")
-       
-       // Redirect based on role mm
-=======
-       
-       // Redirect based on role mm
-      router.push("/")
->>>>>>> 6e02e83c905742ccb0aebd3339673856118ab26c
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-       
-     } catch (err) {
-       setError(err instanceof Error ? err.message : "An unexpected error occurred");
-     } finally {
-       setIsLoading(false);
-     }
-   }
- 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(Email)) {
+      setError("Please enter a valid email address");
+      setIsLoading(false);
+      return; // Prevent further execution
+    }
+
+    // Validate password length
+    if (Password.length < 6) {
+      setError("Password must be at least 6 characters");
+      setIsLoading(false);
+      return; // Prevent further execution
+    }
+
+    try {
+      const data = await poster('api/login', { Email, Password });
+      console.log("User data:", data);
+
+      // Assuming the API returns a success status and some kind of auth token or user data
+      if (data) {
+        // Set authentication cookies or perform any other success-related logic
+        const cookieMaxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 24; // 30 days or 1 day
+        
+        // Redirect to the home page
+        router.push("/");
+      } else {
+        // If login was not successful, retrieve the error message
+        // setError(data.message || "An unexpected error occurred");
+        setError( "invalide email or password");
+
+      }
+    } catch (err) {
+      // setError(err instanceof Error ? err.message : "An unexpected error occurred");
+      setError( "An unexpected error occurred");
+
+    } finally {
+      setIsLoading(false);
+    }
+} 
   
 
   return (

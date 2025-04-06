@@ -48,25 +48,26 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: RegisterData) => {
     try {
-     
       setIsLoading(true);
       setError("");
-
+  
       const payload = {
         Firstname: data.Firstname,
         Lastname: data.Lastname,
         Email: data.Email,
         Password: data.Password,
       };
-
-      // Use the poster function to send a POST request
+  
+      // Use the poster function to send a POST request to register the user
       const response = await poster('users', payload);
-      // console.log(response.data +"here is the date ")
-      
-
-      // Simulate an API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
+  
+      // Check if the user already exists (assuming your API returns a specific status or message)
+      if (response.error) {
+        setError(response.error); // Display error message returned by the API
+        return; // Prevent further processing
+      }
+  
+      // Proceed if registration is successful
       // Show biometric registration UI
       setShowBiometric(true);
     } catch (err) {
@@ -75,7 +76,7 @@ export default function RegisterPage() {
       setIsLoading(false);
     }
   };
-
+  
   const handleBiometricRegistration = async () => {
     try {
       setIsLoading(true);
