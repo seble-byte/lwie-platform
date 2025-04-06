@@ -56,9 +56,15 @@ export default function LoginPage() {
    
        // Set authentication cookies ll
        const cookieMaxAge = rememberMe ? 60 * 60 * 24 * 30 : 60 * 60 * 24; // 30 days or 1 day
+<<<<<<< HEAD
       router.push("/")
        
        // Redirect based on role mm
+=======
+       
+       // Redirect based on role mm
+      router.push("/")
+>>>>>>> 6e02e83c905742ccb0aebd3339673856118ab26c
 
        
      } catch (err) {

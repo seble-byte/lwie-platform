@@ -25,19 +25,19 @@ const allNotifications = [
       image: "/placeholder.svg",
     },
   },
-  {
-    id: 2,
-    type: "message",
-    read: false,
-    title: "New message received",
-    message: "Sarah: Is this item still available for swap?",
-    time: "30 minutes ago",
-    actionUrl: "/messages/456",
-    user: {
-      name: "Sarah Johnson",
-      image: "/placeholder.svg",
-    },
-  },
+  // {
+  //   id: 2,
+  //   type: "message",
+  //   read: false,
+  //   title: "New message received",
+  //   message: "Sarah: Is this item still available for swap?",
+  //   time: "30 minutes ago",
+  //   actionUrl: "/messages/456",
+  //   user: {
+  //     name: "Sarah Johnson",
+  //     image: "/placeholder.svg",
+  //   },
+  // },
   {
     id: 3,
     type: "swap_accepted",
@@ -112,7 +112,7 @@ const allNotifications = [
 const notificationTypes = [
   { id: "all", label: "All", icon: Bell },
   { id: "swap_request", label: "Swap Requests", icon: Repeat },
-  { id: "message", label: "Messages", icon: MessageSquare },
+  // { id: "message", label: "Messages", icon: MessageSquare },
   { id: "like", label: "Likes", icon: Heart },
   { id: "donation", label: "Donations", icon: Gift },
 ]
@@ -132,8 +132,8 @@ export default function NotificationsPage() {
       case "swap_accepted":
       case "swap_rejected":
         return <Repeat className="h-5 w-5" />
-      case "message":
-        return <MessageSquare className="h-5 w-5" />
+      // case "message":
+      //   return <MessageSquare className="h-5 w-5" />
       case "like":
         return <Heart className="h-5 w-5" />
       case "donation":
