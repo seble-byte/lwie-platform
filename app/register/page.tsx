@@ -70,6 +70,8 @@ export default function RegisterPage() {
       // Proceed if registration is successful
       // Show biometric registration UI
       setShowBiometric(true);
+      router.push("/registrationbio"); // Navigate to home after successful registration
+
     } catch (err) {
       setError("Registration failed. Please try again.");
     } finally {
@@ -108,28 +110,6 @@ export default function RegisterPage() {
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Join our community and start swapping!</p>
           </div>
 
-          {showBiometric ? (
-            // Biometric Registration UI
-            <div className="mt-8 space-y-6">
-              <div className="flex flex-col items-center space-y-4">
-                <div className="w-48 h-48 rounded-full border-2 border-dashed border-gray-300 dark:border-gray-700 
-                flex items-center justify-center bg-gray-50 dark:bg-gray-800">
-                  <Camera className="w-16 h-16 text-gray-400" />
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Position your face in the center</p>
-                <button
-                  onClick={handleBiometricRegistration}
-                  disabled={isLoading}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full 
-                  shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none 
-                  focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Register with Face ID"}
-                </button>
-              </div>
-            </div>
-          ) : (
-            // Standard Registration Form
             <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -251,7 +231,7 @@ export default function RegisterPage() {
                 </button>
               </div>
             </form>
-          )}
+          
 
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{" "}

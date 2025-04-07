@@ -31,11 +31,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {(pathname !== '/login' && pathname !== '/register') && <Header />}
+          {(pathname !== '/login' && pathname !== '/register' && pathname !=='/registrationbio') && <Header />}
 
 
           <main>{children}</main>
-          {(pathname !== '/login' && pathname !== '/register') && <Footer />}
+          {(pathname !== '/login' && pathname !== '/register' && pathname !=='/registrationbio') && <Footer />}
 
 
         </ThemeProvider>

@@ -9,13 +9,13 @@ import { Eye, EyeOff, Camera, Loader2 } from "lucide-react";
 import Image from "next/image";
 import poster from "@/shared/post"; // Import the poster function
 
-// const loginSchema = z.object({
-//   Email: z.string().email("Please enter a valid email address"),
-//   Password: z.string().min(8, "Password must be at least 8 characters"),
-//   rememberMe: z.boolean().optional(),
-// });
+const loginSchema = z.object({
+  Email: z.string().email("Please enter a valid email address"),
+  Password: z.string().min(8, "Password must be at least 8 characters"),
+  rememberMe: z.boolean().optional(),
+});
 
-// type LoginData = z.infer<typeof loginSchema>;
+type LoginData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
     const router = useRouter()
@@ -29,6 +29,13 @@ export default function LoginPage() {
   const [Password, setPassword] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
   
+  const {
+    register,
+    // handleSubmit,
+    // formState: { errors },
+  } = useForm<LoginData>({
+    resolver: zodResolver(loginSchema),
+  })
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,7 +104,7 @@ export default function LoginPage() {
                 <div>
                   <label htmlFor="email" className="sr-only">Email address</label>
                   <input
-                    // {...register("Email")}
+                    {...register("Email")}
                     id="email"
                     type="email"
                     autoComplete="email"
@@ -117,7 +124,7 @@ export default function LoginPage() {
                 <div className="relative">
                   <label htmlFor="password" className="sr-only">Password</label>
                   <input
-                    // {...register("Password")}
+                    {...register("Password")}
                     id="password"
                     type={showPassword ? "text" : "password"}
                     value={Password}
@@ -150,17 +157,17 @@ export default function LoginPage() {
               )}
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    // {...register("rememberMe")}
-                    id="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-teal-600 focus:ring-teal-500
-                     border-gray-300 dark:border-gray-700 rounded"
-                  />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm
-                   text-gray-900 dark:text-gray-300">Remember me</label>
-                </div>
+              <div className="flex items-center">
+                <input
+                  {...register("rememberMe")}
+                  id="remember-me"
+                  type="checkbox"
+                  className="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 dark:border-gray-700 rounded"
+                />
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                  Remember me
+                </label>
+              </div>
 
                 <div className="text-sm">
                   <Link href="/forgot-password" className="font-medium text-teal-600
@@ -194,3 +201,7 @@ export default function LoginPage() {
     </div>
   ) 
 }
+
+// function register(arg0: string): import("react").JSX.IntrinsicAttributes & import("react").ClassAttributes<HTMLInputElement> & import("react").InputHTMLAttributes<HTMLInputElement> {
+//   throw new Error("Function not implemented.");
+// }
