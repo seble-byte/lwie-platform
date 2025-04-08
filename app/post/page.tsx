@@ -1,5 +1,5 @@
 "use client"
-import { CreatePostDemo } from "@/components/create-post-demo"
+import CreatePostDemo  from "@/components/create-post-demo"
 import PlanSelectionPage from "@/components/plan-selection-page"
 
 export default function PostItemPage() {

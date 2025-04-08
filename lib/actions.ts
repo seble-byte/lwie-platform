@@ -102,6 +102,8 @@ export async function createPost(data: { category: string; subcategory: string; 
   return status
 }
 
+
+
 // Add purchased posts to user's account
 export async function addPurchasedPosts(numberOfPosts: number): Promise<PostsStatusResult> {
   const cookieStore = cookies()

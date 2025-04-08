@@ -49,7 +49,7 @@ export function PostCounter() {
         {totalRemaining > 0 ? <CheckCircle className="h-4 w-4 mr-2" /> : <AlertCircle className="h-4 w-4 mr-2" />}
         <span>
           {totalRemaining > 0
-            ? `You have ${totalRemaining} post${totalRemaining !== 1 ? "s" : ""} remaining`
+            ? `You have ${totalRemaining} Free post${totalRemaining !== 1 ? "s" : ""} remaining`
             : "You've used all your posts"}
         </span>
       </div>
